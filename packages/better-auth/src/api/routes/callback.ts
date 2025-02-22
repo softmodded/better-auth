@@ -102,12 +102,9 @@ export const callbackOAuth = createAuthEndpoint(
 		}
 
 		if (!userInfo.email) {
-			c.context.logger.error(
-				"Provider did not return email. This could be due to misconfiguration in the provider settings.",
-			);
-			return redirectOnError("email_not_found");
+			userInfo.email = `unset@unset-email.net`;
 		}
-
+		
 		if (!callbackURL) {
 			c.context.logger.error("No callback URL found");
 			throw c.redirect(
